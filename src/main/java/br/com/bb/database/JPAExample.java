@@ -9,14 +9,17 @@ public class JPAExample {
 
     public static void main(String[] args) {
         JPAExample example = new JPAExample();
+
         System.out.println("After Sucessfully insertion ");
         Student student1 = example.saveStudent("Student1");
         Student student2 = example.saveStudent("Student2");
         example.listStudent();
+
         System.out.println("After Sucessfully modification ");
         example.updateStudent(student1.getStudentId(), "Student1 Lesson1");
         example.updateStudent(student2.getStudentId(), "Student2 Lesson2");
         example.listStudent();
+
         System.out.println("After Sucessfully deletion ");
         example.deleteStudent(student2.getStudentId());
         example.listStudent();
@@ -40,10 +43,10 @@ public class JPAExample {
         try {
             entityManager.getTransaction().begin();
             @SuppressWarnings("unchecked")
-            List<Student> Students = entityManager.createQuery("from Student").getResultList();
+            List<Student> Students = entityManager.createQuery("SELECT e FROM Student e").getResultList();
             for (Iterator<Student> iterator = Students.iterator(); iterator.hasNext();) {
                 Student student = (Student) iterator.next();
-                System.out.println(student.getStudentName());
+                System.out.println(student.getStudentId()+" "+student.getStudentName());
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {

@@ -7,6 +7,10 @@ import javax.persistence.Persistence;
 
 public class EntityManagerUtil {
     private static final EntityManagerFactory entityManagerFactory;
+
+    /* Bloco inicializado prioritariamente na classe
+    Não necessita de uma instância da classe
+     */
     static {
         try {
             entityManagerFactory = Persistence.createEntityManagerFactory("test");
