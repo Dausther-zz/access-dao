@@ -10,7 +10,7 @@ public class JPAExample {
     public static void main(String[] args) {
         JPAExample example = new JPAExample();
 
-        System.out.println("After Sucessfully insertion ");
+        System.out.println("After Sucessfully testando mensagem para teste insertion ");
         Student student1 = example.saveStudent("Student1");
         Student student2 = example.saveStudent("Student2");
         example.listStudent();
