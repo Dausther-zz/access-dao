@@ -1,4 +1,6 @@
-package br.com.bb.database;
+package br.com.bb.dao;
+
+import br.com.bb.entities.Student;
 
 import javax.persistence.EntityManager;
 import java.util.Iterator;
@@ -12,6 +14,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     public Student saveStudent(String studentName) {
+        studentName = "hitler";
         Student student = new Student();
         try {
             entityManager.getTransaction().begin();

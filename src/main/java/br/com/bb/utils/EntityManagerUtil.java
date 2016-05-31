@@ -1,4 +1,4 @@
-package br.com.bb.database;
+package br.com.bb.utils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

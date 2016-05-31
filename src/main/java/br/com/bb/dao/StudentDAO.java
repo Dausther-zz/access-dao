@@ -1,4 +1,6 @@
-package br.com.bb.database;
+package br.com.bb.dao;
+
+import br.com.bb.entities.Student;
 
 public interface StudentDAO {
 
