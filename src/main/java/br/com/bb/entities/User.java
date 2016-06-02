@@ -1,10 +1,12 @@
 package br.com.bb.entities;
 
+import br.com.bb.persistence.core.Persistent;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
-public class User {
+public class User implements Persistent<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,6 +14,8 @@ public class User {
     private Long userId;
     @Column(name = "USERNAME")
     private String userName;
+    @Version
+    private long version;
 
     public Long getUserId() {
         return userId;
@@ -27,5 +31,15 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    @Override
+    public Long getId() {
+        return null;
+    }
+
+    @Override
+    public long getVersion() {
+        return version;
     }
 }

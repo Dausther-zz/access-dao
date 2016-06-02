@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import java.util.Iterator;
 import java.util.List;
 
-public class UserDAOImpl implements UserDAO{
+public class UserDAOImpl implements UserDAO {
 
     private final EntityManager entityManager;
 
@@ -15,10 +15,8 @@ public class UserDAOImpl implements UserDAO{
         this.entityManager = entityManager;
     }
 
-
-
     @Override
-    public Boolean persist(User user) {
+    public Boolean persist(org.hsqldb.rights.User user) {
         try {
             entityManager.getTransaction().begin();
              entityManager.merge(user);
@@ -34,7 +32,7 @@ public class UserDAOImpl implements UserDAO{
     public void delete(Long userId) {
         try {
             entityManager.getTransaction().begin();
-            User user = (User) entityManager.find(User.class, userId);
+            User user = entityManager.find(User.class, userId);
             entityManager.remove(user);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -59,7 +57,6 @@ public class UserDAOImpl implements UserDAO{
         User user = null;
         try {
             entityManager.getTransaction().begin();
-            @SuppressWarnings("unchecked")
             List<User> users = entityManager.createQuery("SELECT e FROM User e where User.userId = " + userId).getResultList();
             for (Iterator<User> iterator = users.iterator(); iterator.hasNext();) {
                 user = iterator.next();
@@ -68,11 +65,26 @@ public class UserDAOImpl implements UserDAO{
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-
         }
         return user;
     }
 
 
+    @Override
+    public List<User> find() {
+        List<User> users = null;
+        try {
+            entityManager.getTransaction().begin();
+            users = entityManager.createQuery("SELECT e FROM User e ").getResultList();
+            for (Iterator<User> iterator = users.iterator(); iterator.hasNext();) {
+                User user = iterator.next();
+                System.out.println(user.getUserId()+" - "+user.getUserName());
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
+        return users;
+    }
 
 }

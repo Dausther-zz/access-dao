@@ -3,6 +3,7 @@
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
     <persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
         <class>br.com.bb.entities.Student</class>
+        <class>br.com.bb.entities.User</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url"    value="jdbc:mysql://localhost:3306/test" />
