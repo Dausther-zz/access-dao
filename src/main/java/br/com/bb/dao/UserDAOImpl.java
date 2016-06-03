@@ -16,7 +16,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Boolean persist(org.hsqldb.rights.User user) {
+    public Boolean persist(User user) {
         try {
             entityManager.getTransaction().begin();
              entityManager.merge(user);

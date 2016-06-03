@@ -35,7 +35,7 @@ public class User implements Persistent<Long> {
 
     @Override
     public Long getId() {
-        return null;
+        return userId;
     }
 
     @Override

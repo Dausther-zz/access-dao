@@ -5,6 +5,8 @@ import br.com.bb.dao.StudentDAOImpl;
 import br.com.bb.dao.UserDAO;
 import br.com.bb.dao.UserDAOImpl;
 import br.com.bb.entities.User;
+import br.com.bb.persistence.dao.TypedDao;
+import br.com.bb.persistence.util.TestDAO;
 import br.com.bb.utils.EntityManagerUtil;
 import br.com.bb.entities.Student;
 
@@ -56,9 +58,11 @@ public class EntryPoint {
         userDAO.update(user);
         userDAO.find();
 
+        TypedDao<Long, User> user2Dao = new TestDAO();
+
         System.out.println("After Successfully deletion ");
-        userDAO.delete(1L);
-        userDAO.find();
+        user2Dao.delete(user);
+
 
     }
 

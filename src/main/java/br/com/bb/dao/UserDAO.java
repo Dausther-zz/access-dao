@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserDAO {
 
-    Boolean persist(org.hsqldb.rights.User user);
+    Boolean persist(User user);
 
     void delete(Long userId);
 
