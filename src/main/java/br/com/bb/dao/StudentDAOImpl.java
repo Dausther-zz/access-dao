@@ -14,7 +14,6 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     public Student saveStudent(String studentName) {
-        studentName = "hitler";
         Student student = new Student();
         try {
             entityManager.getTransaction().begin();

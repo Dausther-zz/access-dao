@@ -2,15 +2,21 @@ package br.com.bb.persistence.util;
 
 import br.com.bb.entities.User;
 import br.com.bb.persistence.api.IPersistenceProvider;
-import br.com.bb.persistence.api.PersistenceProviderJpa;
 import br.com.bb.persistence.dao.TypedDao;
+import br.com.bb.utils.TimPersistenceProvider;
 
 public class TestDAO extends TypedDao<Long, User> {
 
-    IPersistenceProvider persistenceProvider = new PersistenceProviderJpa();
+    private TimPersistenceProvider timPersistenceProvider;
+
+
+    public TestDAO(Class<Long> longClass, Class<User> entityClass, TimPersistenceProvider timPersistenceProvider) {
+        super(longClass, entityClass);
+        this.timPersistenceProvider = timPersistenceProvider;
+    }
 
     @Override
-    public boolean delete(User entity) {
-        return persistenceProvider.delete(User.class, entity);
+    protected IPersistenceProvider getPersistenceProvider() {
+        return timPersistenceProvider;
     }
 }

@@ -60,7 +60,7 @@ public class UserDAOImpl implements UserDAO {
             List<User> users = entityManager.createQuery("SELECT e FROM User e where User.userId = " + userId).getResultList();
             for (Iterator<User> iterator = users.iterator(); iterator.hasNext();) {
                 user = iterator.next();
-                System.out.println(user.getUserId()+" "+user.getUserName());
+                System.out.println(user.getUserId()+" - "+user.getUserName());
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {

@@ -1,13 +1,13 @@
 package br.com.bb.persistence.api;
 
 import br.com.bb.persistence.core.Persistent;
-import br.com.bb.utils.EntityManagerUtil;
+
 import javax.persistence.EntityManager;
 import java.io.Serializable;
 
-public class PersistenceProviderJpa implements IPersistenceProvider {
+public abstract class PersistenceProviderJpa implements IPersistenceProvider {
 
-    protected EntityManager entityManager = EntityManagerUtil.getEntityManager();
+    protected abstract EntityManager getEntityManager();
 
     @Override
     public <E extends Persistent<? extends Serializable>> boolean delete(Class<E> entityClass, E entity) {
@@ -15,17 +15,14 @@ public class PersistenceProviderJpa implements IPersistenceProvider {
         boolean hasBeenDeleted = false;
 
         try {
-            entityManager.getTransaction().begin();
-            E element = entityManager.find(entityClass, entity);
-            if(element != null) {
-                entityManager.remove(element);
+            E element = getEntityManager().find(entityClass, entity.getId());
+            if (element != null) {
+                getEntityManager().remove(element);
                 hasBeenDeleted = true;
             }
-            entityManager.getTransaction().commit();
         } catch (Exception e) {
-            entityManager.getTransaction().rollback();
+            throw new RuntimeException(e);
         }
-
         return hasBeenDeleted;
     }
 
